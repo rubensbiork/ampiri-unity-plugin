@@ -369,6 +369,8 @@ For integrating third party SDKs with Android, please follow the steps in [Platf
 1. Please download Unity packages for our networks in the below provided links:
 2. After the download is complete, double click &lt;network&gt;.unitypackage and import all files.
 
+**Note: You cannot use Baidu and MoPub both in one app as this results in a compile error**
+
 
 Platform-Specific Steps
 =======================
