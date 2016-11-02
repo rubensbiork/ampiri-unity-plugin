@@ -402,6 +402,7 @@ To run the Ampiri SDK in the Android version of your Unity-application, follow t
 ## Building and running IOS Ampiri SDK 
 
 To run the Ampiri SDK in the iOS version of your Unity-application, follow these steps:
+
 1. Select __File > Build Settings__.
 2. Select __iOS__ in the __Platforms__ list. Drag all the required scenes to __Scenes In Build__. 
 3. Select on __Player Settings__ and configure __Bundle Identifier__.
