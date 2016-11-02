@@ -4,10 +4,10 @@ Table of contents
 =================
 
 * [Getting Started](#getting-started)
-* [Intergrating Banner](#integrating-banner)
-* [Intergrating Interstitials](#integrating-interstitials)
-* [Intergrating Video](#integrating-video)
-* [Intergrating Third Party SDKs](#integrating-third-party-sdks)
+* [Integrating Banners](#integrating-banner)
+* [Integrating Interstitials](#integrating-interstitials)
+* [Integrating Videos](#integrating-video)
+* [Integrating Third Party SDKs](#integrating-third-party-sdks)
 * [Platform Specific Steps](#platform-specific-steps)
 
 Getting Started
@@ -370,7 +370,7 @@ For integrating third party SDKs with Android, please follow the steps in [Platf
 2. After the download is complete, double click &lt;network&gt;.unitypackage and import all files.
 
 
-Platform Specific Steps
+Platform-Specific Steps
 =======================
 
 #### Android
