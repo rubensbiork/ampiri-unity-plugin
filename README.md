@@ -4,7 +4,7 @@ Table of contents
 =================
 
 * [Getting Started](#getting-started)
-* [Integrating Banners](#integrating-banner)
+* [Integrating Banners](#integrating-banners)
 * [Integrating Interstitials](#integrating-interstitials)
 * [Integrating Videos](#integrating-video)
 * [Integrating Third Party SDKs](#integrating-third-party-sdks)
