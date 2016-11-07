@@ -1,46 +1,49 @@
-# Ampiri Unity Plugin Integration Guide
+# Ampiri Unity 插件集成指南
 
-Table of contents
-=================
+目录
+===
 
-* [Getting Started](#getting-started)
-* [Integrating Banners](#integrating-banners)
-* [Integrating Interstitials](#integrating-interstitials)
-* [Integrating Videos](#integrating-video)
-* [Integrating Third Party SDKs](#integrating-third-party-sdks)
-* [Platform Specific Steps](#platform-specific-steps)
+* [入门](#入门)
+* [集合横幅广告](#集合横幅广告)
+* [集合插屏广告](#集合插屏广告)
+* [集合视频广告](#集合视频广告)
+* [集合第三方SDKs](#集合第三方SDKs)
+* [平台特定步骤](#平台特定步骤)
 
-Getting Started
-=================
-1. Open your project in the Unity editor and select __Assets > Import Package > Custom Package__ and find the downloaded  _AmpiriPlugin.unitypackage_ file
-2. Make sure that all of the files are selected and click __Import__
-3. Under __Assets > Ampiri > Prefabs__, drag Ampiri.prefabs into your scene.
-4. Android/iOS Ad Unit IDs must be entered in the fields that appear. Ad Unit IDs are available from the Ampiri Admin page
+入门
+===
+1. 在 Unity editor 中打您的项目，并选择__Assets > Import Package > Custom Package__。找下载的_AmpiriPlugin.unitypackage_文件。
+2. 确保所有的文件都被选中，并点击__Import__。
+3. 在__Assets > Ampiri > Prefabs__, 把Ampiri.prefabs 拖入scene里面。
+4. Android/iOS Ad Unit IDs 必须在出现的字段中输入。Ad Unit IDs可以从Ampiri管理页面得到。
 
-To see the sample, please import AmpiriUnityDemo.package. There you should see the __DemoApp__ scene in the scenes folder and inside the __Scripts__ folder are some example of Ampiri usage scripts
 
-Initialization
-===================
-You should only call this **once** during the app lifecycle:
+要查看示例，请导入AmpiriUnityDemo.package。在那里，你应该看到__DemoApp__ scene 在scenes文件夹里和__Scripts__文件夹内是Ampiri使用脚本的一些示例
+
+初始化
+=====
+您应该自能在app lifecycle中调用这个**一次**：
 ```
 ampiriSDK.sdk.Init("https://api.ampiri.com", true);
 ```
 
-Integrating Banners
+集合横幅广告
 ===================
-Banners ads can only be shown on the top or the bottom of the app's screen.  
-To show banner:
 
-Available banner sizes:
+
+横幅广告只能在应用程序的屏幕顶部或下方显示。
+要显示横幅：
+
+可用的横幅广告尺寸
 * 320x50 (recommended)
 * 728x90
 
-Available gravity(alignment):
+可用排列
 * Center
 * Left
 * Right
 
-Auto Update advertisement:
+自动更新广告
 * True
 * False
 
@@ -49,14 +52,14 @@ ampiriSDK.sdk.ShowTopBanner(size, gravity, true);
 ampiriSDK.sdk.ShowBottomBanner(size, gravity, true);
 ```
 
-To hide banner(s):
+要隐藏横幅：
 
 ```
 ampiriSDK.sdk.HideTopBanner();
 ampiriSDK.sdk.HideBottomBanner();
 ```
 
-# Banner Callback
+＃横幅回调例子
 ```
 using UnityEngine;
 using UnityEngine.UI;
@@ -120,11 +123,11 @@ public class BannerCallBack : MonoBehaviour {
 }
 ```
 
-Integrating Interstitials
-==========================
-Banner size is defined automatically, depending on the screen size.
+集合插屏广告
+==========
+横幅大小是自动根据不同的屏幕尺寸定义的。
 
-To *load* an interstitial banner:
+要*加载*插屏广告
 ```
 ampiriSDK.sdk.LoadFullscreen();
 ```
@@ -140,7 +143,7 @@ To *load* and *show* interstitial banners with delay:
 ```
 ampiriSDK.sdk.LoadAndShowWithDelayFullscreen();
 ```
-# Interstitial Callback Example
+# 插屏回调例子
 ```
 using UnityEngine;
 using UnityEngine.UI;
@@ -240,9 +243,9 @@ public class InterstitialCallbacks : MonoBehaviour {
 
 ```
 
-Integrating Video
-===================
-To load video:
+集合视频广告
+==========
+要*加载*视频广告
 ```
 ampiriSDK.sdk.LoadVideo();
 ```
@@ -261,7 +264,7 @@ else
 }
 ```
 
-# Video Callback Example
+# 视频广告回调例子
 ```
 using UnityEngine;
 using UnityEngine.UI;
@@ -360,57 +363,54 @@ public class VideoCallBack : MonoBehaviour {
 
 }
 ```
-Integrating Third Party SDKs
-=============================
-#### Android
-For integrating third party SDKs with Android, please follow the steps in [Platform Specific Steps](#platform-specific-steps) below.
-
-#### iOS
-1. Please download Unity packages from the third-party folder.
-2. After the download is complete, double click &lt;network&gt;.unitypackage and import all files.
-
-**Note: You cannot use Baidu and MoPub both in one app as this results in a compile error**
-
-
-Platform-Specific Steps
-=======================
-
+集合第三方SDKs
+============
 #### Android
 
-* To run a sample Android app, import AmpiriUnityPluginTestApp_Android project to Android Studio and run the project.
-* To run your Unity App follow the instructions in the section **Building and Running Android Ampiri SDK**. In point 2 drag the scenes of your app to the __Scenes In Build__ dialog.
+对于Android集合第三方SDKs，请按照下面的步骤[平台特定步骤](#平台特定步骤)。
 
 #### iOS
+1. 请下载在third-party 文件夹里的unity packages。
+2. 当下载完毕时, 双击 &lt;network&gt;.unitypackage 来输入所有文件.
 
-1. Go to __File > Build Settings__, drag and drop the scenes you want to have included in the build to the __Scenes in Build__.  
-2. In the  __Platform__ section select  __iOS__. Configure the build to the right of the __Platform__ section, and select __Build__ in the menu.  
-> **Note: You may be asked to download and install the __iOSSupport Installer__.**
-3. Select a folder where you want to build a project, click __Save__.
-4. Open the exported project in Xcode.
+**注意: 您不能在一个应用程序同时使用百度和MoPub。因为会导致编译错误。**
 
-## Building and running Android Ampiri SDK
+平台特定步骤
+==========
 
-To run the Ampiri SDK in the Android version of your Unity-application, follow these steps:
+#### Android
+* 要运行示例Android应用，进口AmpiriUnityPluginTestApp_Android项目到Android Studio并运行项目。
+* 要运行Unity App，请按照“构建和运行Android Ampiri SDK **”中的说明操作。 
 
-1. Click __File > Build Settings__.
-2. Select __Android__ in the __Platforms__ list and select the __Google Android Project__ checkbox. Drag all the required scenes from your app to __Scenes In Build__. 
-3. Click on __Player Settings__ and configure the __Bundle Identifier__.
-4. Click the __Export__ button and select a location where you want to export the project.
-5. Download and install [Android Studio](https://developer.android.com/studio/index.html) and configure an Android development environment if you have not done so already.
-6. In Android Studio click __File > New > Import Project__. Choose the location of the exported project you specified in step 4.
-7. Configure the project according to the [Ampiri SDK Instructions](https://github.com/ampiri/ampiri-android-sdk).
+#### iOS
+1. 转到__File> Build Settings__，将想要包含在构建中的场景拖放到Build__中的__Scenes。
+2. 在__Platform__部分，选择__iOS__. 配置构建于__Platform__部分的权利，并在menu中选择__Build__。
+> **注意: 您可能会被要求下载并安装 __iOSSupport Installer__.**
+3. 选择您要建立的目标目录，点击__Save__.
+4. 打开Xcode中导出的项目。
 
-## Building and running iOS Ampiri SDK 
+## 构建并运行Android Ampiri SDK
+如果要运行Ampiri SDK 在Unity Android版，请按照以下的步骤：
 
-To run the Ampiri SDK in the iOS version of your Unity-application, follow these steps:
+1. 点击 __File > Build Settings__.
+2. 在__Platforms__列表中选择__Android__并点击__Google的Android Project__复选框。从您的unity项目里拖所需的scenes到__Scenes In Build__。
+3. 点击 __Player Settings__并输入__Bundle Identifier__.
+4. 点击 __Export__ 按钮并选择项目的目的地。
+5. 下载并安装[Android Studio]（https://developer.android.com/studio/index.html）。
+6. 在Android Studio里点击__File > New > Import Project__. 选择您在步骤4中指定的导出的项目的目的。
+7. 根据[Ampiri SDK Instructions](https://github.com/ampiri/ampiri-android-sdk)配置项目。
 
-1. Select __File > Build Settings__.
-2. Select __iOS__ in the __Platforms__ list. Drag all the required scenes to __Scenes In Build__. 
-3. Select on __Player Settings__ and configure __Bundle Identifier__.
-4. Look for __Target minimum iOS Version__ and select __8.0__.
-5. Select the __Export__ button and choose the location where you want to export the project.
-6. Open the exported project in Xcode.
-7. Select the project and under the __General Tab__, configure __signing__.
-8. Scroll down and look for __Embeddded Binaries__, select the __"+"__ button and select __Plugins > iOS > AMPVastLib.Framework__.
-9. On the top Xcode menu, select __Product > Build__.
+## 构建并运行iOS Ampiri SDK
+
+如果要运行Ampiri SDK 在Unity IOS版，请按照以下的步骤：
+
+1. 点击 __File > Build Settings__.
+2. 在__Platforms__列表中选择__iOS__。从您的unity项目里拖所需的scenes到__Scenes In Build__。
+3. 点击 __Player Settings__并输入__Bundle Identifier__.
+4，寻找__Target minium iOS Version__ 并选择 __8.0__。
+5. 点击 __Export__ 按钮并选择项目的目的地。
+6. 打开Xcode中导出的项目。
+7. 点击项目并在 __General Tab__里配置 __signing__.
+8. 向下滚动，寻找__Embeddded Binaries__，选择__“+”__按钮并选择__Plugins > iOS > AMPVastLib.Framework__。
+9. 在顶部Xcode中，选择__Product > Build__
 

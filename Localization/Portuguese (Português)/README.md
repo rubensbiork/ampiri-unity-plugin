@@ -1,55 +1,55 @@
-# Ampiri Unity Plugin Integration Guide
+# Guia de Integração para Ampiri Unity Plugin
 
-Table of contents
+Conteúdo
 =================
 
-* [Getting Started](#getting-started)
-* [Integrating Banners](#integrating-banners)
-* [Integrating Interstitials](#integrating-interstitials)
-* [Integrating Videos](#integrating-video)
-* [Integrating Third Party SDKs](#integrating-third-party-sdks)
-* [Platform Specific Steps](#platform-specific-steps)
+* [Começando](#começando)
+* [Integrando Banner](#integrando-banners)
+* [Integrando Interstitials](#integrando-interstitials)
+* [Integrando Video](#integrando-vídeo)
+* [Integrando Third Party SDKs](#integrando-sdks-de-terceiros)
+* [Passos específicos da plataforma](#passos-específicos-da-plataforma)
 
-Getting Started
+Começando
 =================
-1. Open your project in the Unity editor and select __Assets > Import Package > Custom Package__ and find the downloaded  _AmpiriPlugin.unitypackage_ file
-2. Make sure that all of the files are selected and click __Import__
-3. Under __Assets > Ampiri > Prefabs__, drag Ampiri.prefabs into your scene.
-4. Android/iOS Ad Unit IDs must be entered in the fields that appear. Ad Unit IDs are available from the Ampiri Admin page
+1. Para ver o exemplo, importe AmpiriUnityDemo.package. Lá você vai ver a scene __DemoApp__ na pasta scenes e dentro da pasta __Scripts__ tem alguns exemplos de uso dos scripts da Ampiri.
+2. Certifique-se de que todos os arquivos foram selecionados e clique em __Import__
+3. Em __Assets > Ampiri > Prefabs__, arraste Ampiri.prefabs dentro da sua scene.
+4. Android/iOS Ad Unit IDs devem ser preenchidos nos campos que aparecerem. Ad Unit IDs estão disponíveis na área de administração do site Ampiri.
 
-To see the sample, please import AmpiriUnityDemo.package. There you should see the __DemoApp__ scene in the scenes folder and inside the __Scripts__ folder are some example of Ampiri usage scripts
+Para ver um app de exemplo e o código, entre na pasta __DemoScene__. Lá, você deve ver o arquivo __New_Demo__ e dentro da pasta __Scripts__ estão exemplos de uso dos scripts da Ampiri.
 
-Initialization
+Inicializando
 ===================
-You should only call this **once** during the app lifecycle:
+Você deve chamar somente isso **uma única vez** durante o tempo de vida da aplicação:
 ```
 ampiriSDK.sdk.Init("https://api.ampiri.com", true);
 ```
 
-Integrating Banners
+Integrando Banners
 ===================
-Banners ads can only be shown on the top or the bottom of the app's screen.  
-To show banner:
+Anúncios no formate de banners são mostrados somente na parte de cima ou de baixo da tela do app.
+Para mostrar banner:
 
-Available banner sizes:
-* 320x50 (recommended)
+Tamanho de banners disponíveis:
+* 320x50 (recomendado)
 * 728x90
 
-Available gravity(alignment):
+Alinhamentos disponíveis:
 * Center
 * Left
 * Right
 
-Auto Update advertisement:
+Propaganda de Auto Atualização:
 * True
 * False
 
 ```
-ampiriSDK.sdk.ShowTopBanner(size, gravity, true);
-ampiriSDK.sdk.ShowBottomBanner(size, gravity, true);
+ampiriSDK.sdk.ShowTopBanner(tamanho, alinhamento, true);
+ampiriSDK.sdk.ShowBottomBanner(tamanho, alinhamento, true);
 ```
 
-To hide banner(s):
+Para esconder banner(s):
 
 ```
 ampiriSDK.sdk.HideTopBanner();
@@ -120,27 +120,27 @@ public class BannerCallBack : MonoBehaviour {
 }
 ```
 
-Integrating Interstitials
+Integrando Interstitials
 ==========================
-Banner size is defined automatically, depending on the screen size.
+O tamanho do banner é definido automaticamente, dependendo do tamanho da tela.
 
-To *load* an interstitial banner:
+Para *carregar* um banner interstitial:
 ```
 ampiriSDK.sdk.LoadFullscreen();
 ```
-To *show* interstitial banner:
+Para *mostrar* um banner interstitial:
 ```
 ampiriSDK.sdk.ShowFullscreen();
 ```
-To *load* and *show* interstitial banners:
+Para *carregar* e *mostrar* um banner interstitial:
 ```
 ampiriSDK.sdk.LoadAndShowFullscreen();
 ```
-To *load* and *show* interstitial banners with delay:
+Para *carregar* e *mostrar* um banner interstitial com atraso:
 ```
 ampiriSDK.sdk.LoadAndShowWithDelayFullscreen();
 ```
-# Interstitial Callback Example
+# Exemplo de Interstitial Callback
 ```
 using UnityEngine;
 using UnityEngine.UI;
@@ -240,15 +240,15 @@ public class InterstitialCallbacks : MonoBehaviour {
 
 ```
 
-Integrating Video
+Integrando Vídeo
 ===================
-To load video:
+
+Para carregar video:
 ```
 ampiriSDK.sdk.LoadVideo();
 ```
-Once a video has been successfully loaded, you can use the callback AmpiriEvents.video_OnBannerLoaded
-to show video:
 
+Uma vez que o vídeo foi carregado com sucesso, você pode usar o callback AmpiriEvents.video_OnBannerLoaded para mostrar o vídeo:
 ```
 if (ampiriSDK.sdk.VideoIsReady())
 {
@@ -261,7 +261,7 @@ else
 }
 ```
 
-# Video Callback Example
+# Exemplo de Video Callback
 ```
 using UnityEngine;
 using UnityEngine.UI;
@@ -276,7 +276,7 @@ public class VideoCallBack : MonoBehaviour {
     AdsSdk ampiriSDK;
 
     [SerializeField]
-    FunctionalTestingExample fntest; 
+    FunctionalTestingExample fntest;
 
     [SerializeField]
     Text text;
@@ -319,7 +319,7 @@ public class VideoCallBack : MonoBehaviour {
             ampiriSDK.sdk.ShowVideo();
         }
         else
-       
+
             Log("Video_OnBannerLoaded ready NO");
         }
     }
@@ -360,57 +360,55 @@ public class VideoCallBack : MonoBehaviour {
 
 }
 ```
-Integrating Third Party SDKs
+Integrando SDKs de terceiros
 =============================
 #### Android
-For integrating third party SDKs with Android, please follow the steps in [Platform Specific Steps](#platform-specific-steps) below.
+Para integrar SDK de terceiros no Android, por favor siga os passos em [Passos específicos da plataforma](#passos-específicos-da-plataforma) abaixo.
 
 #### iOS
-1. Please download Unity packages from the third-party folder.
-2. After the download is complete, double click &lt;network&gt;.unitypackage and import all files.
-
-**Note: You cannot use Baidu and MoPub both in one app as this results in a compile error**
+1. Por favor, baixe o pacote Unity da pasta "Third Party SDKs".
+2. Depois de baixar o pacote, duplo clique em &lt;network&gt;.unitypackage e importe todos os arquivos.
 
 
-Platform-Specific Steps
+Passos Específicos da Plataforma
 =======================
 
 #### Android
 
-* To run a sample Android app, import AmpiriUnityPluginTestApp_Android project to Android Studio and run the project.
-* To run your Unity App follow the instructions in the section **Building and Running Android Ampiri SDK**. In point 2 drag the scenes of your app to the __Scenes In Build__ dialog.
+* Para rodar um exemplo de Android app, importe o projeto AmpiriUnityPluginTestApp_Android para o Android Studio e execute.
+* Para rodar o Unity app, siga as intruções na seção **Compilando e Rodando Android Ampiri SDK**. No ponto 2 arraste as scenes do seu app para a janela __Scenes In Build__.
 
 #### iOS
 
-1. Go to __File > Build Settings__, drag and drop the scenes you want to have included in the build to the __Scenes in Build__.  
-2. In the  __Platform__ section select  __iOS__. Configure the build to the right of the __Platform__ section, and select __Build__ in the menu.  
-> **Note: You may be asked to download and install the __iOSSupport Installer__.**
-3. Select a folder where you want to build a project, click __Save__.
-4. Open the exported project in Xcode.
+1. Entre em __File > Build Settings__, arraste e solte as scenes que você quer incluir na build para __Scenes in Build__.
+2. Na seção __Platform__ selecione __iOS__. Configure o build a direita da seção __Platform__, e selecione __Build__ no menu.
+> **Nota: Você deve ser questionado sobre baixar e instalar o __iOSSupport Installer__.**
+3. Selecione a pasta onde você quer compilar seu projeto, clique __Save__.
+4. Abra os arquivos exportados no Xcode.
 
-## Building and running Android Ampiri SDK
+Compilando e Rodando Android Ampiri SDK
+=======================================
 
-To run the Ampiri SDK in the Android version of your Unity-application, follow these steps:
+Para rodar o Ampiri SDK na versão Android do seu Unity app, siga os passos:
 
-1. Click __File > Build Settings__.
-2. Select __Android__ in the __Platforms__ list and select the __Google Android Project__ checkbox. Drag all the required scenes from your app to __Scenes In Build__. 
-3. Click on __Player Settings__ and configure the __Bundle Identifier__.
-4. Click the __Export__ button and select a location where you want to export the project.
-5. Download and install [Android Studio](https://developer.android.com/studio/index.html) and configure an Android development environment if you have not done so already.
-6. In Android Studio click __File > New > Import Project__. Choose the location of the exported project you specified in step 4.
-7. Configure the project according to the [Ampiri SDK Instructions](https://github.com/ampiri/ampiri-android-sdk).
+1. Clique em __File > Build Settings__.
+2. Selecione __Android__ na lista de __Platforms__ e marque o checkbox __Google Android Project__. Arraste todos as scenes exigidas pelo seu app para __Scenes In Build__.
+3. Clique em __Player Settings__ e configure o __Bundle Identifier__.
+4. Clique no botão __Export__ e escolha onde você quer exportar o projeto.
+5. Baixe e instale o [Android Studio](https://developer.android.com/studio/index.html) e configure o ambiente de desenvolvimento Android se você não fez isso ainda.
+6. No Android Studio clique em __File > New > Import Project__. Escolha o local do projeto exportado especificado no passo 4.
+7. Configure o projeto de acordo com [Ampiri SDK Instructions](https://github.com/ampiri/ampiri-android-sdk).
 
-## Building and running iOS Ampiri SDK 
+## Compilando e rodando iOS Ampiri SDK
 
-To run the Ampiri SDK in the iOS version of your Unity-application, follow these steps:
+Para rodar o Ampiri SDK na versão iOS do seu Unity app, siga os passos:
 
-1. Select __File > Build Settings__.
-2. Select __iOS__ in the __Platforms__ list. Drag all the required scenes to __Scenes In Build__. 
-3. Select on __Player Settings__ and configure __Bundle Identifier__.
-4. Look for __Target minimum iOS Version__ and select __8.0__.
-5. Select the __Export__ button and choose the location where you want to export the project.
-6. Open the exported project in Xcode.
-7. Select the project and under the __General Tab__, configure __signing__.
-8. Scroll down and look for __Embeddded Binaries__, select the __"+"__ button and select __Plugins > iOS > AMPVastLib.Framework__.
-9. On the top Xcode menu, select __Product > Build__.
-
+1. Selecione __File > Build Settings__.
+2. Selecione __iOS__ na lista __Platforms__. Arraste todos as scenes exigidas para __Scenes In Build__.
+3. Selecione __Player Settings__ e configure __Bundle Identifier__.
+4. Olhe em __Target minimum iOS Version__ e selecione __8.0__.
+5. Clique no botão __Export__ e escolha onde você quer exportar o projeto.
+6. Abra o projeto exportado no Xcode.
+7. Selecione o projeto e em __General Tab__, configure __signing__.
+8. Role pra baixo e olhe em __Embeddded Binaries__, clique no botão __"+"__ e selecione __Plugins > iOS > AMPVastLib.Framework__.
+9. Na parte de cime do menu Xcode, selecione __Product > Build__.
