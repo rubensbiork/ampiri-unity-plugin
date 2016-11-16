@@ -376,8 +376,6 @@ Platform-Specific Steps
 =======================
 
 #### Android
-
-* To run a sample Android app, import AmpiriUnityPluginTestApp_Android project to Android Studio and run the project.
 * To run your Unity App follow the instructions in the section **Building and Running Android Ampiri SDK**. In point 2 drag the scenes of your app to the __Scenes In Build__ dialog.
 
 #### iOS
